@@ -13,7 +13,6 @@ export const TrafficLIghtIndicator = ({
   const [isShowFormula, setIsShowFormula] = useState<boolean>(false);
   const [trigger, setTrigger] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const indicatorRef = useRef<HTMLDivElement>(null);
 
   const handleMouseLeave = useCallback(() => {
     setTrigger(false);
@@ -47,7 +46,6 @@ export const TrafficLIghtIndicator = ({
   return (
     <div className="relative">
       <div
-        ref={indicatorRef}
         onMouseEnter={() => setTrigger(true)}
         onMouseLeave={handleMouseLeave}
         className={`w-4 h-4 rounded-full ${indicatorColor}`}
