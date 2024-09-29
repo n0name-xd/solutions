@@ -1,6 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import img from "../assets/react.svg";
 import img2 from "../assets/images.png";
+
+export const TrafficLIghtIndicator = () => {
+  return <></>;
+};
 
 export const ImgAppearance = (): JSX.Element => {
   const [isShowFormula, setIsShowFormula] = useState<boolean>(false);
@@ -9,9 +13,11 @@ export const ImgAppearance = (): JSX.Element => {
   const marginalityRef = useRef<HTMLDivElement>(null);
   const incomeRef = useRef<HTMLDivElement>(null);
   const [imgItem, setImgItem] = useState<string>(img);
+  const [currentRef, setCurrentRef] = useState<RefObject<HTMLDivElement>>();
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = (ref: RefObject<HTMLDivElement>) => {
     setTrigger(true);
+    setCurrentRef(ref);
   };
 
   const handleMouseLeave = () => {
@@ -24,12 +30,13 @@ export const ImgAppearance = (): JSX.Element => {
   };
 
   const setFormulaPosition = (trigger: boolean) => {
-    // сдесь нужно определить на какой реф сейас наведен курсор
-    const elem = marginalityRef.current;
-    if (elem) {
-      const imgT = elem.getAttribute("data-formula");
+    if (currentRef) {
+      const elem = currentRef.current;
+      if (elem) {
+        const imgT = elem.getAttribute("data-formula");
 
-      setImgItem(imgT === "react.svg" ? img : img2);
+        setImgItem(imgT === "react.svg" ? img : img2);
+      }
     }
 
     if (trigger) {
@@ -58,7 +65,7 @@ export const ImgAppearance = (): JSX.Element => {
           <div
             ref={marginalityRef}
             data-formula="react.svg"
-            onMouseEnter={handleMouseEnter}
+            onMouseEnter={() => handleMouseEnter(marginalityRef)}
             onMouseLeave={handleMouseLeave}
             className="w-4 h-4 rounded-full bg-green-700"
           ></div>
@@ -68,7 +75,7 @@ export const ImgAppearance = (): JSX.Element => {
           <div
             ref={incomeRef}
             data-formula="images.png"
-            onMouseEnter={handleMouseEnter}
+            onMouseEnter={() => handleMouseEnter(incomeRef)}
             onMouseLeave={handleMouseLeave}
             className="w-4 h-4 rounded-full bg-slate-500"
           ></div>
