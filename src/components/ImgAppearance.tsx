@@ -2,14 +2,14 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import img from "../assets/react.svg";
 import img2 from "../assets/images.png";
 
-interface ITrafficLIghtIndicatorProps {
+interface ITrafficLightIndicatorProps {
   img: string;
   indicatorColor: string;
 }
-export const TrafficLIghtIndicator = ({
+export const TrafficLightIndicator = ({
   img,
   indicatorColor,
-}: ITrafficLIghtIndicatorProps) => {
+}: ITrafficLightIndicatorProps) => {
   const [isShowFormula, setIsShowFormula] = useState<boolean>(false);
   const [trigger, setTrigger] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -64,12 +64,12 @@ export const ImgAppearance = (): JSX.Element => {
     <div className="w-full flex justify-center h-full items-center mt-10">
       <div className="relative border-2 border-red-700 w-96 h-96 rounded-2xl">
         <div className="flex gap-4 items-center  mt-20 ml-20">
-          <TrafficLIghtIndicator img={img} indicatorColor="bg-green-700" />
+          <TrafficLightIndicator img={img} indicatorColor="bg-green-700" />
 
           <div>marginality</div>
         </div>
         <div className="flex gap-4 items-center  mt-20 ml-20">
-          <TrafficLIghtIndicator img={img2} indicatorColor="bg-red-600" />
+          <TrafficLightIndicator img={img2} indicatorColor="bg-red-600" />
           <div>income</div>
         </div>
       </div>
