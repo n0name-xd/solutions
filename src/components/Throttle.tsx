@@ -13,7 +13,9 @@ interface IComment {
 }
 
 const getComments = async (name: string) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/comments`);
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/comments?_limit=200`
+  );
 
   const data = await res.json();
 
@@ -30,16 +32,22 @@ export const Throttle: React.FC<IThrottleProps> = ({
     setValue(value);
   };
 
-  useEffect(() => {
+  const getCommentsList = async (): Promise<void> => {
     getComments(value).then((res) => setComments(res));
+  };
+
+  useEffect(() => {
+    getCommentsList();
   }, [value]);
 
   return (
     <div className={className}>
       <h1 className="m-2">Items count: {comments.length}</h1>
       <div className="p-2 flex gap-5">
-        <label htmlFor="">Search</label>
+        <label htmlFor="text">Search</label>
         <input
+          id="text"
+          name="text"
           className="border-2 border-gray-500"
           type="text"
           value={value}
