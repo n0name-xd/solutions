@@ -1,4 +1,3 @@
-// import { ImgAppearance } from "./components/ImgAppearance";
 import { Throttle } from "./components/Throttle";
 
 function App() {
